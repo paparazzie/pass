@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+use \App\Student; 
 
-use \App\Pass;
-
-use Hash;
-
-class PassController extends Controller
+class StudentController extends Controller
 {
-    public function index () {
+      public function index () {
     return view('index');
 }
 
@@ -18,11 +16,10 @@ class PassController extends Controller
       return view('student-register');
     }
 
-    
 
-    public function validateStudent (){
+    public function storeStudent(){
 
-       $this->validate(request(),[
+      return $this->validate(request(),[
 
                        'firstname'=>'required|string|min:3',
                        'lastname' =>'required|string|min:3',
@@ -32,16 +29,12 @@ class PassController extends Controller
                        'denomination'=>'required|min:5',
                        'parent_no'=>'required|min:11',
                        'course'   =>'required',
-                       'matric_no'=>'required|max:7|unique',
+                       'matric_no'=>'required||unique:students,matric_no|max:7',
                        'level'=>'required|min:3',
                        'password' => 'required|min:6|confirmed']);
-
-
-    }
-
-    public function storeStudent(){
  
-     Pass::create([
+ 
+     Student::create([
                   'firstname'=>request('firstname'),
                   'lastname'=>request('lastname'),
                   'hall'=>request('hall'),
@@ -57,5 +50,4 @@ class PassController extends Controller
 
       return redirect('/');
     }
-
 }

@@ -71,7 +71,7 @@
     </div>
 
 
-    <div class = "errormodal{{ $errors->has('hall') ? ' errormodal' : '' }}">
+    <div class = "errormodal{{ $errors->has('matric_no') ? ' errormodal' : '' }}">
          @if($errors->has('matric_no'))
          <span class = 'err'> {{ $errors->first('matric_no') }}</span>
          @endif
