@@ -26,6 +26,7 @@ class CreateStudentsTable extends Migration
             $table->string('matric_no');
             $table->text('level');
             $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

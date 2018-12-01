@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+
 use \App\Student; 
+
+use Auth;
 
 class StudentController extends Controller
 {
@@ -19,7 +22,7 @@ class StudentController extends Controller
 
     public function storeStudent(){
 
-      return $this->validate(request(),[
+       $this->validate(request(),[
 
                        'firstname'=>'required|string|min:3',
                        'lastname' =>'required|string|min:3',
@@ -48,6 +51,37 @@ class StudentController extends Controller
                   'password'=>bcrypt(request('password'))]);
 
 
-      return redirect('/');
+      return redirect('/student-login');
     }
-}
+
+    public function showLogin(){
+      return view('student-login');
+    }
+
+
+    public function login(Request $request){
+      $rules = [
+        'matric_no'=> 'required', 
+        'password'=>'required'
+      ];
+       $messages = [
+            'matric_no.required' => "Please enter matric number!",
+            'password.required'=> 'Please enter a password!'
+        ];
+      $this->validate(request(), $rules, $messages);
+      if(Auth::guard('students')->attempt(['matric_no'=>$request->matric_no, 'password'=>$request->password])){
+        return redirect('/');
+      }
+      else{
+        return redirect()->back()->withInput($request->except('password'))->withErrors(['invalid'=>'Invalid name or password']);
+      }
+    }
+
+    public function logout(){
+    Auth::guard('students')->logout();
+    return redirect('student-login');
+  }
+
+
+    }
+
