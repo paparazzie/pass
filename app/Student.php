@@ -9,5 +9,10 @@ class Student extends Authenticatable
 {
     use Notifiable;
     protected $guard = 'students';
-     protected  $guarded = [];
+    protected  $guarded = [];
+
+    public function candidate(){
+      return $this->belongsTo(Student::class, 'student_id', 'id');
+    }
+
 }

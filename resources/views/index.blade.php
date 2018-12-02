@@ -3,6 +3,7 @@
 
 @section ('content')
 
+
   <div class="dialog">
     <button class="def-button trigger-btn">What do you want to do?</button>
     <ul class="options-list">
@@ -14,4 +15,8 @@
     </ul>
 
 
+
+
+
 @endsection
+

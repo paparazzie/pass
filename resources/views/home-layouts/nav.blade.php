@@ -13,8 +13,11 @@
   <div class="img"></div>
   </div>
 
+
 <!-- TOP BAR WITH LOGO AND TEXT -->
   <div class="top-bar">
     <div class="logo"></div>
     <h1>Babcock University Pass Booking </h1>
   </div>
+
+  

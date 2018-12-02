@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use \App\Student; 
+use \App\ShortDistance;
 
 use Auth;
 
@@ -70,6 +71,7 @@ class StudentController extends Controller
         ];
       $this->validate(request(), $rules, $messages);
       if(Auth::guard('students')->attempt(['matric_no'=>$request->matric_no, 'password'=>$request->password])){
+
         return redirect('/');
       }
       else{
@@ -80,6 +82,84 @@ class StudentController extends Controller
     public function logout(){
     Auth::guard('students')->logout();
     return redirect('student-login');
+  }
+
+
+  public function showShortDistance(){
+    $loggedStudent = Auth::guard('students')->user();
+    $firstname = $loggedStudent->firstname;
+    $matric_no =  $loggedStudent->matric_no;
+    $hall =  $loggedStudent->hall;
+    $course = $loggedStudent->course;
+    $level =  $loggedStudent->level;
+    
+    return view('short-distance',[
+       'firstname'=>$firstname,
+       'matric_no'=>$matric_no,
+       'course'=>$course,
+       'level'=>$level,
+       'hall'=>$hall
+
+    ]);
+  }
+
+  public function shortDistance(){
+
+      $rules = [
+        'level'=>'required',
+        'hall'=>'required',
+        'destination'=>'required',
+        'guardian_name'=> 'required', 
+        'guardian_phone'=> 'required', 
+        'date_of_leave'=> 'required', 
+        'date_of_return'=> 'required', 
+        'address'=> 'required', 
+        'purpose'=> 'required'
+      ];
+       $messages = [
+            'level.required'=> 'Please enter you level!',
+            'hall.required' => "Please enter your hall!",
+            'destination.required'=> 'Please enter a destination!',
+            'guardian_name.required' => "Please enter guardian name!",
+            'guardian_phone.required'=> 'Please enter your guardians number!',
+            'date_of_leave.required' => "Please enter a date of leave!",
+            'date_of_return.required'=> 'Please enter a date of return!',
+            'address.required' => "Please enter an address!",
+            'purpose.required'=> 'Please enter your purpose of leave!'
+        ];
+      $this->validate(request(), $rules, $messages);
+
+
+
+
+        $loggedStudent = Auth::guard('students')->user();
+        $student_id    = $loggedStudent->id;
+        $name          = $loggedStudent->firstname;
+        $matric_no     = $loggedStudent->matric_no;
+        $course        = $loggedStudent->course;
+        
+
+
+     ShortDistance::create([
+
+
+                  'student_id'=>$student_id,
+                  'name'=>$name ,
+                  'matric_no'=>$matric_no,
+                  'course'=>$course ,
+                  'level'=>request('level'),
+                  'hall'=>request('hall') ,             
+                  'destination'=> request('destination'),
+                  'guardian_name'=>request('guardian_name'),
+                  'guardian_phone'=>request('guardian_phone'),
+                  'date_of_leave'=>request('date_of_leave'),
+                  'date_of_return'=>request('date_of_return'),
+                  'address'=>request('address'),
+                  'purpose'=>request('purpose')
+                ]);
+
+     return redirect('/');
+
   }
 
 
