@@ -17,7 +17,14 @@
      @if($errors->has('hall'))
     <span class = 'err'> {{ $errors->first('hall') }}</span>
     @endif
-    <input type="text" name="hall" class="text-field" placeholder="Hall">
+   <select name="hall" class="text-field"  value = "{{old('hall')}}">
+        <option>select hall</option>
+       @foreach($halls as $hall)
+       <option value="{{$hall}}"> {{$hall}} </option>
+       @endforeach
+
+    
+    </select>
     <!-- <label for="name">Destination:</label> -->
      @if($errors->has('destination'))
     <span class = 'err'> {{ $errors->first('destination') }}</span>

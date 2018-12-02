@@ -17,7 +17,11 @@ class StudentController extends Controller
 }
 
     public function showStudentRegister (){
-      return view('student-register');
+      $halls = ["Samuel Akande", "Queen Esther", "Nelson Mandela", "Bethel Splendor", "Neal Wilson", "Nyberg", "Ogden", "Winslow", "Gideon Troopers", "Welch", "Crystal", "Platinum", "Felicia Adebisi Dada (FAD)", "Queen Esther", "Off-Campus", "Ameyo Adadevoh", "Gamaliel", "Havilah Gold", "Justice Deborah", "White"];
+    sort($halls);
+      return view('student-register',[
+        'halls'=>$halls
+      ]);
     }
 
 
@@ -86,19 +90,11 @@ class StudentController extends Controller
 
 
   public function showShortDistance(){
-    $loggedStudent = Auth::guard('students')->user();
-    $firstname = $loggedStudent->firstname;
-    $matric_no =  $loggedStudent->matric_no;
-    $hall =  $loggedStudent->hall;
-    $course = $loggedStudent->course;
-    $level =  $loggedStudent->level;
+    $halls = ["Samuel Akande", "Queen Esther", "Nelson Mandela", "Bethel Splendor", "Neal Wilson", "Nyberg", "Ogden", "Winslow", "Gideon Troopers", "Welch", "Crystal", "Platinum", "Felicia Adebisi Dada (FAD)", "Queen Esther", "Off-Campus", "Ameyo Adadevoh", "Gamaliel", "Havilah Gold", "Justice Deborah", "White"];
+    sort($halls);
     
     return view('short-distance',[
-       'firstname'=>$firstname,
-       'matric_no'=>$matric_no,
-       'course'=>$course,
-       'level'=>$level,
-       'hall'=>$hall
+       'halls'=>$halls
 
     ]);
   }

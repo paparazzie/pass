@@ -27,7 +27,10 @@
          @endif
     <select name="hall" class="text-field"  value = "{{old('hall')}}">
         <option>select hall</option>
-        <option>FAD</option>
+       @foreach($halls as $hall)
+       <option value="{{$hall}}"> {{$hall}} </option>
+       @endforeach
+
     
     </select>
 </div>
