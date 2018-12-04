@@ -9,6 +9,7 @@ Route::post('/student-login','StudentController@login');
 Route::get('/student-logout','StudentController@logout');
 Route::get('/short-distance','StudentController@showShortDistance');
 Route::post('/short-distance','StudentController@shortDistance');
+Route::get('/long-distance','StudentController@showLongDistance');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

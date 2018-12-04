@@ -125,9 +125,6 @@ class StudentController extends Controller
         ];
       $this->validate(request(), $rules, $messages);
 
-
-
-
         $loggedStudent = Auth::guard('students')->user();
         $student_id    = $loggedStudent->id;
         $name          = $loggedStudent->firstname;
@@ -156,6 +153,16 @@ class StudentController extends Controller
 
      return redirect('/');
 
+  }
+
+  public function showLongDistance(){
+    $halls = ["Samuel Akande", "Queen Esther", "Nelson Mandela", "Bethel Splendor", "Neal Wilson", "Nyberg", "Ogden", "Winslow", "Gideon Troopers", "Welch", "Crystal", "Platinum", "Felicia Adebisi Dada (FAD)", "Queen Esther", "Off-Campus", "Ameyo Adadevoh", "Gamaliel", "Havilah Gold", "Justice Deborah", "White"];
+    sort($halls);
+    
+    return view('long-distance',[
+       'halls'=>$halls
+
+    ]);
   }
 
 

@@ -1,8 +1,12 @@
-  
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>short distance</title>
+  <title>long distance</title>
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body id="long-distance">
@@ -18,7 +22,7 @@
   <div class="background-header">
     <div class="overlay"></div>
     <div class="logo"></div>
-    <h1 class="module-name">Short Distance Booking</h1>
+    <h1 class="module-name">long Distance Booking</h1>
   </div>
 
 <!-- MODAL MENU FOR NAVIGATION -->
@@ -35,7 +39,8 @@
     </div>
   </div>
 
-
+<!-- LONG DISTANCE BOOKING FORM -->
+  
 
 
   <form class="def-form long-dist-form clearfix" action="/short-distance"  method="POST">
@@ -91,7 +96,16 @@
   <span class = 'err'> {{ $errors->first('purpose') }}</span>
   @endif
     <textarea class="text-field" name="purpose" placeholder="Purpose"></textarea>
+   
+ <h4>Upload leave of absence if you are leaving during the week</h4>
+    <input type="file" name="pic" class="text-field" value="choose">
+
     <input type="submit" name="submit" class="text-field" value="Apply">
   </form>
+
+ 
+
+  
+
 
 @include ('home-layouts.footer')

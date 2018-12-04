@@ -11,7 +11,7 @@ class Student extends Authenticatable
     protected $guard = 'students';
     protected  $guarded = [];
 
-    public function candidate(){
+    public function student(){
       return $this->belongsTo(Student::class, 'student_id', 'id');
     }
 
